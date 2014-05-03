@@ -44,7 +44,7 @@ public class WorkEntryFilter {
         return workEntries.stream()
                 .filter(predicateForProject(project))
                 .sorted(Comparator.comparing(WorkEntry::getDate).thenComparing(entry -> entry.getPerson().getEmail()))
-                .findFirst().orElse(new WorkEntry(null, project, new Person("")))
+                .findFirst().orElse(new WorkEntry(null, project, Person.NO_ONE))
                 .getPerson();
     }
 }

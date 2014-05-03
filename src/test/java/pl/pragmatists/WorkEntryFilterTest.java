@@ -45,4 +45,11 @@ private WorkEntryFilter filter = new WorkEntryFilter(WORK_ENTRIES);
 
         assertThat(person).isEqualTo(JANE);
     }
+
+    @Test
+    public void shouldFindNooneWorkingForOpenSource() {
+        Person person = filter.firstPersonWorkingOn(OPEN_SOURCE);
+
+        assertThat(person).isEqualTo(Person.NO_ONE);
+    }
 }
