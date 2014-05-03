@@ -2,6 +2,7 @@ package pl.pragmatists;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WorkEntryFilter {
     private List<WorkEntry> workEntries;
@@ -11,13 +12,8 @@ public class WorkEntryFilter {
     }
 
     public List<WorkEntry> filterByProject(Project project) {
-        List<WorkEntry> filtered = new ArrayList<>();
-
-        for (WorkEntry workEntry : workEntries) {
-            if(workEntry.getProject() == project) {
-                filtered.add(workEntry);
-            }
-        }
-        return filtered;
+        return workEntries.stream()
+                .filter(entry -> entry.getProject() == project)
+                .collect(Collectors.toList());
     }
 }
