@@ -7,6 +7,7 @@ import java.util.List;
 
 import static pl.pragmatists.DataProvider.WORK_ENTRIES;
 import static pl.pragmatists.Project.INTERNAL;
+import static pl.pragmatists.Project.OPEN_SOURCE;
 
 public class WorkEntryFilterTest {
 
