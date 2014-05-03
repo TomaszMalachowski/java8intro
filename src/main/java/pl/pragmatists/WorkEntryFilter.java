@@ -31,7 +31,7 @@ public class WorkEntryFilter {
     public List<Person> peopleWorkingOn(Project project) {
         return workEntries.stream()
                 .filter(predicateForProject(project))
-                .map(entry -> entry.getPerson())
+                .map(WorkEntry::getPerson)
                 .collect(toList());
     }
 
