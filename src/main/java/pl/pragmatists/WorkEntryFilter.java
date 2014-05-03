@@ -2,6 +2,7 @@ package pl.pragmatists;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -66,5 +67,12 @@ public class WorkEntryFilter {
 
     private Predicate<WorkEntry> predicateForPerson(Person person) {
         return entry -> entry.getPerson().equals(person);
+    }
+
+    public List<Project> getProjectsDoneBy(Person... people) {
+        return Arrays.asList(people).stream()
+                .flatMap(person -> workEntries.stream().filter(predicateForPerson(person)))
+                .map(WorkEntry::getProject)
+                .collect(toList());
     }
 }

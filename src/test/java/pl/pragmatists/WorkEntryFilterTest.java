@@ -69,4 +69,11 @@ private WorkEntryFilter filter = new WorkEntryFilter(WORK_ENTRIES);
 
         assertThat(days).containsOnly(1,2,3,4,7,8,9,10,11);
     }
+
+    @Test
+    public void shouldGetProjectsDoneBySpecificPeople() {
+        List<Project> projects = filter.getProjectsDoneBy(GREG, SARA);
+
+        assertThat(projects).containsOnly(COMMERCIAL, INTERNAL);
+    }
 }
