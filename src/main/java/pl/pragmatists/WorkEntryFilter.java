@@ -16,4 +16,10 @@ public class WorkEntryFilter {
                 .filter(entry -> entry.getProject() == project)
                 .collect(Collectors.toList());
     }
+
+    public List<WorkEntry> filterByPerson(Person person) {
+        return workEntries.stream()
+                .filter(entry -> entry.getPerson().equals(person))
+                .collect(Collectors.toList());
+    }
 }
