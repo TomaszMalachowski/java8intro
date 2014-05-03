@@ -1,5 +1,6 @@
 package pl.pragmatists;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -46,5 +47,13 @@ public class WorkEntryFilter {
                 .sorted(Comparator.comparing(WorkEntry::getDate).thenComparing(entry -> entry.getPerson().getEmail()))
                 .findFirst().orElse(new WorkEntry(null, project, Person.NO_ONE))
                 .getPerson();
+    }
+
+    public List<Integer> getDaysWorkedOnBy(Project project, Person person) {
+        return null;
+    }
+
+    public List<Person> getPeopleWorkingOn(LocalDate localDate) {
+        return null;
     }
 }
