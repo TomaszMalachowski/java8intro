@@ -43,7 +43,7 @@ public class WorkEntryFilter {
     public Person firstPersonWorkingOn(Project project) {
         return workEntries.stream()
                 .filter(predicateForProject(project))
-                .sorted(Comparator.comparing(WorkEntry::getDate))
+                .sorted(Comparator.comparing(WorkEntry::getDate).thenComparing(entry -> entry.getPerson().getEmail()))
                 .findFirst().orElse(new WorkEntry(null, project, new Person("")))
                 .getPerson();
     }

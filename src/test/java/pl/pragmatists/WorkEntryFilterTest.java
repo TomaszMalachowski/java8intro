@@ -43,6 +43,6 @@ private WorkEntryFilter filter = new WorkEntryFilter(WORK_ENTRIES);
     public void shouldFindFirstPersonWorkingOnProject() {
         Person person = filter.firstPersonWorkingOn(INTERNAL);
 
-        assertThat(person).isEqualTo(JOHN);
+        assertThat(person).isEqualTo(JANE);
     }
 }
