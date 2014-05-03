@@ -2,7 +2,10 @@ package pl.pragmatists;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class WorkEntryFilter {
     private List<WorkEntry> workEntries;
@@ -12,14 +15,27 @@ public class WorkEntryFilter {
     }
 
     public List<WorkEntry> filterByProject(Project project) {
+        return filterBy(predicateForProject(project));
+    }
+
+    private List<WorkEntry> filterBy(Predicate<WorkEntry> predicate) {
         return workEntries.stream()
-                .filter(entry -> entry.getProject() == project)
-                .collect(Collectors.toList());
+                .filter(predicate)
+                .collect(toList());
     }
 
     public List<WorkEntry> filterByPerson(Person person) {
+        return filterBy(entry -> entry.getPerson().equals(person));
+    }
+
+    public List<Person> peopleWorkingOn(Project project) {
         return workEntries.stream()
-                .filter(entry -> entry.getPerson().equals(person))
-                .collect(Collectors.toList());
+                .filter(predicateForProject(project))
+                .map(entry -> entry.getPerson())
+                .collect(toList());
+    }
+
+    private Predicate<WorkEntry> predicateForProject(Project project) {
+        return entry -> entry.getProject() == project;
     }
 }
