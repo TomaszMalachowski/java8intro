@@ -1,6 +1,7 @@
 package pl.pragmatists;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class WorkEntryFilter {
     public Person firstPersonWorkingOn(Project project) {
         return workEntries.stream()
                 .filter(predicateForProject(project))
-                .sorted((first, second) -> first.getDate().compareTo(second.getDate()))
+                .sorted(Comparator.comparing(WorkEntry::getDate))
                 .findFirst().orElse(new WorkEntry(null, project, new Person("")))
                 .getPerson();
     }
