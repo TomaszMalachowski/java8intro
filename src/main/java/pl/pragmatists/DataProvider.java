@@ -18,24 +18,26 @@ import static pl.pragmatists.Project.INTERNAL;
 
 public class DataProvider {
     public static List<Person> PEOPLE = new ArrayList<>();
+    public static List<WorkEntry> WORK_ENTRIES = new ArrayList<>();
+
     public static Person JOHN = new Person("john@company.com");
     public static Person JANE = new Person("jane@company.com");
     public static Person SARA = new Person("sara@company.com");
     public static Person GREG = new Person("greg@company.com");
 
-    static {
-        DataProvider.PEOPLE.add(DataProvider.JOHN);
-        DataProvider.PEOPLE.add(DataProvider.JANE);
-        DataProvider.PEOPLE.add(DataProvider.SARA);
-        DataProvider.PEOPLE.add(DataProvider.GREG);
 
-        DataProvider.WORK_ENTRIES.addAll(DataProvider.createWorkLogFor(rangeClosed(1, APRIL.maxLength()), INTERNAL, JOHN, JANE));
-        DataProvider.WORK_ENTRIES.addAll(DataProvider.createWorkLogFor(rangeClosed(1, APRIL.maxLength()), COMMERCIAL, GREG));
-        DataProvider.WORK_ENTRIES.addAll(DataProvider.createWorkLogFor(rangeClosed(1, 13), COMMERCIAL, SARA));
-        DataProvider.WORK_ENTRIES.addAll(DataProvider.createWorkLogFor(rangeClosed(14, APRIL.maxLength()), INTERNAL, SARA));
+    static {
+        PEOPLE.add(DataProvider.JOHN);
+        PEOPLE.add(DataProvider.JANE);
+        PEOPLE.add(DataProvider.SARA);
+        PEOPLE.add(DataProvider.GREG);
+
+        WORK_ENTRIES.addAll(createWorkLogFor(rangeClosed(1, APRIL.maxLength()), INTERNAL, JOHN, JANE));
+        WORK_ENTRIES.addAll(createWorkLogFor(rangeClosed(1, APRIL.maxLength()), COMMERCIAL, GREG));
+        WORK_ENTRIES.addAll(createWorkLogFor(rangeClosed(1, 13), COMMERCIAL, SARA));
+        WORK_ENTRIES.addAll(createWorkLogFor(rangeClosed(14, APRIL.maxLength()), INTERNAL, SARA));
     }
 
-    public static List<WorkEntry> WORK_ENTRIES = new ArrayList<>();
 
     static List<WorkEntry> createWorkLogFor(IntStream daysOfWork, Project project, Person... people) {
         return LocalDateRange.rangeOf(daysOfWork, APRIL, Year.of(2014))
