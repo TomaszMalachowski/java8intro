@@ -6,6 +6,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.pragmatists.DataProvider.GREG;
+import static pl.pragmatists.DataProvider.JANE;
 import static pl.pragmatists.DataProvider.JOHN;
 import static pl.pragmatists.DataProvider.SARA;
 import static pl.pragmatists.DataProvider.WORK_ENTRIES;
@@ -36,5 +37,12 @@ private WorkEntryFilter filter = new WorkEntryFilter(WORK_ENTRIES);
         List<Person> people = filter.peopleWorkingOn(COMMERCIAL);
 
         assertThat(people).containsOnly(GREG, SARA);
+    }
+
+    @Test
+    public void shouldFindFirstPersonWorkingOnProject() {
+        Person person = filter.firstPersonWorkingOn(INTERNAL);
+
+        assertThat(person).isEqualTo(JOHN);
     }
 }

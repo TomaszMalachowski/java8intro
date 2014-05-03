@@ -38,4 +38,12 @@ public class WorkEntryFilter {
     private Predicate<WorkEntry> predicateForProject(Project project) {
         return entry -> entry.getProject() == project;
     }
+
+    public Person firstPersonWorkingOn(Project project) {
+        return workEntries.stream()
+                .filter(predicateForProject(project))
+                .sorted((first, second) -> first.getDate().compareTo(second.getDate()))
+                .findFirst().orElse(new WorkEntry(null, project, new Person("")))
+                .getPerson();
+    }
 }
