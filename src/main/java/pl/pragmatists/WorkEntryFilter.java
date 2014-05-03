@@ -27,7 +27,7 @@ public class WorkEntryFilter {
     }
 
     public List<WorkEntry> filterByPerson(Person person) {
-        return filterBy(entry -> entry.getPerson().equals(person));
+        return filterBy(predicateForPerson(person));
     }
 
     public List<Person> peopleWorkingOn(Project project) {
@@ -35,10 +35,6 @@ public class WorkEntryFilter {
                 .filter(predicateForProject(project))
                 .map(WorkEntry::getPerson)
                 .collect(toList());
-    }
-
-    private Predicate<WorkEntry> predicateForProject(Project project) {
-        return entry -> entry.getProject() == project;
     }
 
     public Person firstPersonWorkingOn(Project project) {
@@ -50,10 +46,25 @@ public class WorkEntryFilter {
     }
 
     public List<Integer> getDaysWorkedOnBy(Project project, Person person) {
-        return null;
+        return workEntries.stream()
+                .filter(predicateForProject(project).and(predicateForPerson(person)))
+                .map(WorkEntry::getDate)
+                .map(LocalDate::getDayOfMonth)
+                .collect(toList());
     }
 
     public List<Person> getPeopleWorkingOn(LocalDate localDate) {
-        return null;
+        return workEntries.stream()
+                .filter(entry -> entry.getDate().equals(localDate))
+                .map(WorkEntry::getPerson)
+                .collect(toList());
+    }
+
+    private Predicate<WorkEntry> predicateForProject(Project project) {
+        return entry -> entry.getProject() == project;
+    }
+
+    private Predicate<WorkEntry> predicateForPerson(Person person) {
+        return entry -> entry.getPerson().equals(person);
     }
 }
