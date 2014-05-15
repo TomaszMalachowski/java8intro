@@ -24,4 +24,26 @@ public class CarsTest {
         assertThat(car.accept(Fuel.Diesel)).isFalse();
         assertThat(car.accept(Fuel.AC)).isFalse();
     }
+
+    @Test
+    public void fastCarShouldHavePetrolEngine() {
+        Car car = new FastCar() {
+        };
+
+        Engine engine = car.drive();
+
+        assertThat(engine).isSameAs(Engine.Petrol);
+    }
+
+    @Test
+    public void fastCarShouldAcceptOnlyPetrol98() {
+        Car car = new FastCar() {
+        };
+
+        assertThat(car.accept(Fuel.Petrol98)).isTrue();
+        assertThat(car.accept(Fuel.Petrol95)).isFalse();
+        assertThat(car.accept(Fuel.Diesel)).isFalse();
+        assertThat(car.accept(Fuel.AC)).isFalse();
+    }
+
 }
