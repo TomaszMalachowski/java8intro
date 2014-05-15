@@ -68,4 +68,15 @@ public class CarsTest {
         assertThat(car.accept(Fuel.AC)).isFalse();
     }
 
+    @Test
+    public void toyotaPriusShouldAcceptAcOrPetrolAsFuel() {
+        HybridCar car = new ToyotaPrius();
+
+        assertThat(car.accept(Fuel.AC)).isTrue();
+        assertThat(car.accept(Fuel.Petrol95)).isTrue();
+        assertThat(car.accept(Fuel.Petrol98)).isTrue();
+        assertThat(car.accept(Fuel.Diesel)).isFalse();
+        assertThat(car.accept(Fuel.ArcticReadyDiesel)).isFalse();
+
+    }
 }
