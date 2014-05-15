@@ -7,7 +7,11 @@ public interface HybridCar extends ElectricityRunningCar, PetrolRunningCar {
 
     @Override
     default Engine drive() {
-        throw new RuntimeException("I have no idea!");
+        if (canUseElectricEngine()) {
+            return ElectricityRunningCar.super.drive();
+        } else {
+            return PetrolRunningCar.super.drive();
+        }
     }
 
     @Override
