@@ -22,6 +22,7 @@ public class CarsTest {
         assertThat(car.accept(Fuel.Petrol95)).isTrue();
         assertThat(car.accept(Fuel.Petrol98)).isTrue();
         assertThat(car.accept(Fuel.Diesel)).isFalse();
+        assertThat(car.accept(Fuel.ArcticReadyDiesel)).isFalse();
         assertThat(car.accept(Fuel.AC)).isFalse();
     }
 
@@ -42,6 +43,27 @@ public class CarsTest {
 
         assertThat(car.accept(Fuel.Petrol98)).isTrue();
         assertThat(car.accept(Fuel.Petrol95)).isFalse();
+        assertThat(car.accept(Fuel.Diesel)).isFalse();
+        assertThat(car.accept(Fuel.ArcticReadyDiesel)).isFalse();
+        assertThat(car.accept(Fuel.AC)).isFalse();
+    }
+
+    @Test
+    public void volvoXC90ArcticShouldHaveDieselEngine() {
+        Car car = new VolvoXC90Arctic();
+
+        Engine engine = car.drive();
+
+        assertThat(engine).isSameAs(Engine.Diesel);
+    }
+
+    @Test
+    public void volvoXC90ArcticShouldAcceptOnlyArcticReadyDiesel() {
+        Car car = new VolvoXC90Arctic();
+
+        assertThat(car.accept(Fuel.ArcticReadyDiesel)).isTrue();
+        assertThat(car.accept(Fuel.Petrol95)).isFalse();
+        assertThat(car.accept(Fuel.Petrol98)).isFalse();
         assertThat(car.accept(Fuel.Diesel)).isFalse();
         assertThat(car.accept(Fuel.AC)).isFalse();
     }

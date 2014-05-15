@@ -4,5 +4,6 @@ public enum Fuel {
     Petrol95,
     Petrol98,
     Diesel,
+    ArcticReadyDiesel,
     AC
 }
