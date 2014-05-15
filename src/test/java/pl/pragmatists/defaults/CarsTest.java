@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 public class CarsTest {
+    //introducing default method
     @Test
     public void fordMondeoShouldHavePetrolEngine() {
         Car car = new FordMondeo();
