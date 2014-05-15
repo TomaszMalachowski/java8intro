@@ -77,6 +77,25 @@ public class CarsTest {
         assertThat(car.accept(Fuel.Petrol98)).isTrue();
         assertThat(car.accept(Fuel.Diesel)).isFalse();
         assertThat(car.accept(Fuel.ArcticReadyDiesel)).isFalse();
+    }
 
+    @Test
+    public void toyotaPriusShouldUseElectricEngineIfBatteryIsOver30PercentFull() {
+        HybridCar car = new ToyotaPrius();
+        car.batteryLevelIs(45);
+
+        Engine engine = car.drive();
+
+        assertThat(engine).isSameAs(Engine.Electric);
+    }
+
+    @Test
+    public void toyotaPriusShouldUsePetrolEngineIfBatteryIsBelow30PercentFull() {
+        HybridCar car = new ToyotaPrius();
+        car.batteryLevelIs(22);
+
+        Engine engine = car.drive();
+
+        assertThat(engine).isSameAs(Engine.Petrol);
     }
 }
