@@ -70,9 +70,6 @@ public class LambdasIntroductionTest {
 
         void meHavingSingleMethodOnly(String name, int age);
 
-        default void anotherMethodCanBeHereButMustBeImplemented() {
-
-        }
     }
 
 }

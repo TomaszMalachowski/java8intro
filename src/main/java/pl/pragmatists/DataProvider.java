@@ -20,10 +20,10 @@ public class DataProvider {
     public static List<Person> PEOPLE = new ArrayList<>();
     public static List<WorkEntry> WORK_ENTRIES = new ArrayList<>();
 
-    public static Person JOHN = new Person("john@company.com");
-    public static Person JANE = new Person("jane@company.com");
-    public static Person SARA = new Person("sara@company.com");
-    public static Person GREG = new Person("greg@company.com");
+    public static Person JOHN = new Person("john@company.com",20);
+    public static Person JANE = new Person("jane@company.com",30);
+    public static Person SARA = new Person("sara@company.com",35);
+    public static Person GREG = new Person("greg@company.com",33);
 
 
     static {
