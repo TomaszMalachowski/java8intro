@@ -39,7 +39,7 @@ public class DataProvider {
     }
 
 
-    static List<WorkEntry> createWorkLogFor(IntStream daysOfWork, Project project, Person... people) {
+    private static List<WorkEntry> createWorkLogFor(IntStream daysOfWork, Project project, Person... people) {
         return LocalDateRange.rangeOf(daysOfWork, APRIL, Year.of(2014))
                 .stream()
                 .filter(isWorkDay())
