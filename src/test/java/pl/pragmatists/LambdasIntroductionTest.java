@@ -10,6 +10,18 @@ public class LambdasIntroductionTest {
     private String testField = "";
 
     @Test
+    public void quickFix_TryItOnNewRunnable() throws Exception {
+        run(new Runnable() {
+
+            @Override
+            public void run() {
+                System.out.println("will be called");
+            }
+
+        });
+    }
+
+    @Test
     public void passLambdaAsRunnable() throws Exception {
         run(() -> System.out.println("will be called"));
     }
