@@ -20,8 +20,8 @@ public class GroupByTest {
             new WorkEntry(LocalDate.of(2014,6,1),Project.INTERNAL, SARA),
             new WorkEntry(LocalDate.of(2014,6,2),Project.COMMERCIAL, SARA),
             new WorkEntry(LocalDate.of(2014,6,3),Project.COMMERCIAL, SARA),
-            new WorkEntry(LocalDate.of(2014,6,1),Project.COMMERCIAL,DataProvider.GREG),
-            new WorkEntry(LocalDate.of(2014,6,2),Project.COMMERCIAL,DataProvider.GREG)
+            new WorkEntry(LocalDate.of(2014,6,1),Project.COMMERCIAL, GREG),
+            new WorkEntry(LocalDate.of(2014,6,2),Project.COMMERCIAL, GREG)
         );
 
     @Test
@@ -29,7 +29,7 @@ public class GroupByTest {
         Map<pl.pragmatists.Person, List<WorkEntry>> personWorkEntries = workLogEntries.stream().collect(Collectors.groupingBy(x -> x.getPerson()));
 
         Assertions.assertThat(personWorkEntries.get(SARA)).hasSize(4);
-        Assertions.assertThat(personWorkEntries.get(DataProvider.GREG)).hasSize(2);
+        Assertions.assertThat(personWorkEntries.get(GREG)).hasSize(2);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class GroupByTest {
                                 Collectors.toSet()))
         );
 
-        Assertions.assertThat(countByDate.get(LocalDate.of(2014,6,1))).containsOnly(SARA,GREG).doesNotHaveDuplicates();
+        Assertions.assertThat(countByDate.get(LocalDate.of(2014,6,1))).containsOnly(SARA, GREG).doesNotHaveDuplicates();
         Assertions.assertThat(countByDate.get(LocalDate.of(2014,6,3))).containsOnly(SARA).doesNotHaveDuplicates();
     }
 
@@ -77,7 +77,5 @@ public class GroupByTest {
     public static int integerProduct(int a, int b) {
         return a*b;
     }
-
-    //pokazać różnicę operacji na streamach a operacji terminalnych
 
 }
