@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static pl.pragmatists.DataProvider.GREG;
 import static pl.pragmatists.DataProvider.SARA;
 
-public class GroupByTest {
+public class CollectorsTest {
 
     private List<WorkEntry> workLogEntries = Arrays.asList(
             new WorkEntry(LocalDate.of(2014,6,1),Project.COMMERCIAL, SARA),
@@ -69,13 +69,22 @@ public class GroupByTest {
 
     @Test
     public void reduceToAgeProduct() throws Exception {
-        Integer ageProduct = DataProvider.PEOPLE.stream().map(Person::getAge).reduce(1, GroupByTest::integerProduct);
+        Integer ageProduct = DataProvider.PEOPLE.stream().map(Person::getAge).reduce(1, CollectorsTest::integerProduct);
 
         Assertions.assertThat(ageProduct).isEqualTo(693000);
     }
 
+    @Test
+    public void reduceToString() throws Exception {
+        String officialWay = DataProvider.PEOPLE.stream().map(Person::toString).collect(Collectors.joining(","));
+        String theHardWay = DataProvider.PEOPLE.stream().map(Person::toString).reduce("", (s, s2) -> s.isEmpty() ? s2 : s + "," + s2);
+
+        Assertions.assertThat(officialWay).isEqualTo("john@company.com,jane@company.com,sara@company.com,greg@company.com");
+        Assertions.assertThat(theHardWay).isEqualTo("john@company.com,jane@company.com,sara@company.com,greg@company.com");
+    }
+
     public static int integerProduct(int a, int b) {
-        return a*b;
+        return a * b;
     }
 
 }
